@@ -1,0 +1,107 @@
+@import "../../styles/partials/core/reset";
+@import "../../styles/partials/core/variables";
+@import "../../styles/partials/core/mixins";
+
+@import "../../styles/partials/components/typography";
+
+//@import './partials/pages/details';
+
+/* prettier-ignore */
+:root {
+  --body-bgc:             #{$body-bgc};
+  --card-bgc:             #{$card-bgc};
+  //--details-bgc:        #{$details-bgc};
+
+  --text-color:           #{$text-color};
+  --text-secondary:       #{$text-secondary};
+  //--details-link-color: #{$details-link-color};
+  --hd-color:             #{$hd-color};
+  --placeholder:          #{$placeholder};
+
+--checkbox-bgc:         #{$checkbox-bgc};
+--checkbox-bgc-hover:   #{$checkbox-bgc-hover};
+--checkbox-bgc-checked: #{$checkbox-bgc-checked};
+}
+
+/* prettier-ignore */
+[data-theme="dark"] {
+  --body-bgc:             #{$dark-body-bgc};
+  --card-bgc:             #{$dark-card-bgc};
+  //--details-bgc:        #{$dark-details-bgc};
+
+  --text-color:           #{$dark-text-color};
+  --text-secondary:       #{$dark-text-secondary};
+  --details-link-color:   #{$dark-details-link-color};
+  --hd-color:             #{$dark-hd-color};
+  --placeholder:          #{$dark-placeholder};
+
+  --checkbox-bgc:         #{$dark-checkbox-bgc};
+}
+
+body {
+  background-color: var(--body-bgc);
+
+  .bg-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 40px;
+    background: url(../../images/desktop/bg-pattern-header.svg);
+    background-repeat: no-repeat;
+    background-size: 100% 162px;
+
+    @media only screen and (max-width: 780px) {
+      background: url(../../images/tablet/bg-pattern-header.svg);    
+      background-repeat: no-repeat;
+    }
+
+    @media only screen and (max-width: 576px) {
+      padding: 0 24px;
+      background: url(../../images/mobile/bg-pattern-header.svg);
+      background-repeat: no-repeat;
+      background-size: 100% 136px;
+    }
+
+    // to hide modal
+    .hidden {
+      display: none;
+    }
+
+    .page-container {
+      width: 100%;
+      max-width: 1110px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  //------------ ## HEADER ## -------------//
+  //-------------------------------------//
+
+  .main-index {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 100px;
+  }
+
+  
+}
+
+//----------- #Message -------------//
+
+.message {
+  text-align: center;
+}
+
+
+
+.btn-primary {
+  @include btn-primary();
+}
+.btn-secondary {
+  @include btn-secondary();
+}
+

@@ -1,0 +1,53 @@
+@import "../../styles/partials/core/mixins";
+
+.switch-theme {
+  width: 112px;
+  height: 26px;
+  @include flex-sp(row);
+
+  .switch {
+    position: relative;
+    @include flex-sp(row);
+    width: 50px;
+    height: 26px;
+
+    input {
+      width: 25px;
+      height: 25px;
+      opacity: 0;
+
+      &:hover + .slider:before {
+        background-color: $primary-color-l;
+      }
+
+      &:checked + .slider:before {
+        transform: translateX(22px);
+      }
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      width: 48px;
+      height: 24px;
+      top: 0;
+      left: 0;
+      display: block;
+      background-color: $white;
+      border-radius: 12px;
+      transition: 0.4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 14px;
+      width: 14px;
+      left: 5px;
+      bottom: 5px;
+      border-radius: 50%;
+      background-color: $primary-color;
+      transition: 0.4s;
+    }
+  }
+}

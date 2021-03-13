@@ -1,0 +1,29 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a img {
+  outline: none;
+}
+
+input {
+  box-shadow: none;
+  outline: none;
+}
+
+button {
+  border: 0;
+  outline: none;
+}
+
+// Por defecto, la los navegadores utilizan Arial como
+// fuente para 'inputs' y botones. También establecen en tamaño.
+
+input,
+button,
+input::placeholder {
+  font-family: "Kumbh Sans", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}

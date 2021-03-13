@@ -1,0 +1,13 @@
+.cards-list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(327px, 1fr));
+  column-gap: 3%;
+  row-gap: 65px;
+  margin-bottom: 42px;
+
+  @media only screen and (max-width: 780px) {
+    column-gap: 2%;
+    row-gap: 49px;
+  } 
+}

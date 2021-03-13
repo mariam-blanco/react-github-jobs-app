@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/static/css/main.90be08d5.chunk.css",
+    "main.js": "/static/js/main.bc7af9cd.chunk.js",
+    "main.js.map": "/static/js/main.bc7af9cd.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.76f9dc48.js",
+    "runtime-main.js.map": "/static/js/runtime-main.76f9dc48.js.map",
+    "static/js/2.dfdd93d0.chunk.js": "/static/js/2.dfdd93d0.chunk.js",
+    "static/js/2.dfdd93d0.chunk.js.map": "/static/js/2.dfdd93d0.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.90be08d5.chunk.css.map": "/static/css/main.90be08d5.chunk.css.map",
+    "static/js/2.dfdd93d0.chunk.js.LICENSE.txt": "/static/js/2.dfdd93d0.chunk.js.LICENSE.txt",
+    "static/media/MainDetails.scss": "/static/media/bg-pattern-detail-footer.439c5055.svg",
+    "static/media/App.scss": "/static/media/bg-pattern-header.f3307602.svg",
+    "static/media/SearchBox.scss": "/static/media/icon-check.7b769ecf.svg",
+    "static/media/icon-location.325ff3d9.svg": "/static/media/icon-location.325ff3d9.svg",
+    "static/media/icon-moon.038e80ca.svg": "/static/media/icon-moon.038e80ca.svg",
+    "static/media/icon-sun.9422c153.svg": "/static/media/icon-sun.9422c153.svg",
+    "static/media/logo.8c0b6449.svg": "/static/media/logo.8c0b6449.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.76f9dc48.js",
+    "static/js/2.dfdd93d0.chunk.js",
+    "static/css/main.90be08d5.chunk.css",
+    "static/js/main.bc7af9cd.chunk.js"
+  ]
+}
