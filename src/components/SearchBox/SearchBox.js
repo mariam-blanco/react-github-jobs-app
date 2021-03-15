@@ -6,23 +6,10 @@ import './SearchBox.scss';
 
 const SearchBox = (props) => {
 
-  const { searchChange, search, handleSearch, openModal } = props;
+  const { searchChange, search, searchJobs, openModal } = props;
 
-  // change placeholder text
-  const [isSmallScreen, setIsSmallScreen] = useState(window.matchMedia('(max-width: 850px)').matches);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 850px)');
-    const updateIsSmallScreen = (e) => setIsSmallScreen(mediaQuery.matches);
-    mediaQuery.addEventListener('change', updateIsSmallScreen);
-
-    // clean up addEventListener
-    return () => {
-      mediaQuery.removeEventListener('change', updateIsSmallScreen);
-    }
-  }, [isSmallScreen]);
-
-
+  // SEARCH
+  // get search values and change search state
   const handleChange = (e) => {
     const value =
       e.target.type === "checkbox"
@@ -36,15 +23,24 @@ const SearchBox = (props) => {
   }
 
   const handleClick = (e) => {
-
     e.preventDefault();
-    handleSearch();
+    searchJobs();
   }
 
-  const handleOpenModal = (e) => {
-    e.preventDefault();
-    openModal();
-  }
+  // PLACEHOLDER
+  // change placeholder text
+  const [isSmallScreen, setIsSmallScreen] = useState(window.matchMedia('(max-width: 850px)').matches);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 850px)');
+    const updateIsSmallScreen = (e) => setIsSmallScreen(mediaQuery.matches);
+    mediaQuery.addEventListener('change', updateIsSmallScreen);
+
+    // clean up addEventListener
+    return () => {
+      mediaQuery.removeEventListener('change', updateIsSmallScreen);
+    }
+  }, [isSmallScreen]);
 
   return (
     <div className="search-box">
@@ -61,8 +57,8 @@ const SearchBox = (props) => {
                 ? 'Filter by title...'
                 : 'Filter by title, companies, expertise...'}
           />
-          <IconFilter />
-          <button onClick={handleOpenModal} className="btn-search-sm">
+          <IconFilter openModal={openModal} />
+          <button onClick={handleClick} className="btn-search-sm">
             <IconSearch fill="#fff" />
           </button>
         </div>
@@ -73,10 +69,7 @@ const SearchBox = (props) => {
             value={search.location}
             onChange={handleChange}
             type="text"
-            placeholder={
-              isSmallScreen
-                ? 'Full Time'
-                : 'Full Time Only'}
+            placeholder="Filter by location..."
           />
         </div>
         <div className="button-box">
@@ -88,7 +81,13 @@ const SearchBox = (props) => {
               type="checkbox"
             />
             <span className="checkmark"></span>
-            <span className="label"></span>
+            <span className="label">
+              {
+                isSmallScreen
+                  ? 'Full Time'
+                  : 'Full Time Only'
+              }
+            </span>
           </label>
 
           <div className="submit-btn">

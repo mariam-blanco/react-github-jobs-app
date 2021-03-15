@@ -4,15 +4,31 @@ import iconLocation from '../../images/desktop/icon-location.svg';
 
 const Modal = (props) => {
 
-  const { isOpen, closeModal } = props;
+  const { searchChange, search, createQuery, isOpen, closeModal } = props;
 
-  const handleCloseModal = (e) => {
-    e.currentTarget === e.target && closeModal();
+  // SEARCH VALUES
+  const handleChange = (e) => {
+    const value =
+      e.target.type === "checkbox"
+        ? e.target.checked
+        : e.target.value;
+
+    searchChange({
+      ...search,
+      [e.target.name]: value,
+    });
   }
 
-  const handleSearchModal = (e) => {
+  // SEARCH
+  const handleClick = (e) => {
     e.preventDefault();
+    createQuery();
     closeModal();
+  }
+
+  // CLOSE MODAL
+  const handleCloseModal = (e) => {
+    e.currentTarget === e.target && closeModal();
   }
 
   return (
@@ -22,18 +38,25 @@ const Modal = (props) => {
           <img src={iconLocation} alt="Search icon" />
           <input
             name="location"
+            value={search.location}
+            onChange={handleChange}
             type="text"
             placeholder="Filter by location..."
           />
         </div>
         <div className="button-box">
           <label className="checkbox-wrapper">
-            <input name="jobType" type="checkbox" />
+            <input
+              name="isFullTime"
+              checked={search.isFullTime}
+              onChange={handleChange}
+              type="checkbox"
+            />
             <span className="checkmark"></span>
             <span className="label">Full Time Only</span>
           </label>
           <div className="submit-btn">
-            <button onClick={handleSearchModal} className="btn-search">Search</button>
+            <button onClick={handleClick} className="btn-search">Search</button>
           </div>
         </div>
       </div>

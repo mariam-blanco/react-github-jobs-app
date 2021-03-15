@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
-
-//import getDataFromApi from '../services/getDataFromApi';
-//import GitHub from '../services/api';
 import { getAllJobs, getSearch } from '../../services/apiJson';
 
 import Header from '../Header/Header';
@@ -15,29 +12,54 @@ import './App.scss';
 
 const App = () => {
 
-  //const [page, setPage] = useState(1);
+  const [page, setPage] = useState(1);
+  //const [query, setQuery] = useState('');
+  //const [isLoading, setIsLoading] = useState(true);
+  //const [hasError, setHasError] = useState(false);
   const [jobs, setJobs] = useState([]);
+
   const [search, setSearch] = useState({
     terms: '',
     location: '',
     isFullTime: false
   });
 
-
-  // get data onload
+  // API
   useEffect(() => {
     getAllJobs()
       .then(data => {
-        setJobs(data);
+        if (data) {
+          setJobs(data);
+          //setIsLoading(false);
+        }
       });
   }, []);
 
-  const searchChange = (valuesObj) => setSearch(valuesObj);
-
-  const handleSearch = () => {
+  const searchJobs = () => {
+    let newQuery;
     if (search.terms || search.location) {
-      getSearch(search);
+      newQuery = `?page=${page}&description=${search.terms}&location=${search.location}`;
+      search.isFullTime && (newQuery += '&full_time=on');
+    } else {
+      newQuery = `?page=${page}`;
     }
+
+    console.log('Query: ', newQuery);
+    getSearch(newQuery)
+      .then(data => {
+        if (data) {
+          setJobs(data);
+          //setIsLoading(false);
+        }
+      });
+  }
+
+  const searchChange = (values) => {
+    setSearch(values);
+  }
+
+  const handlePageChange = () => {
+    setPage(prev => prev + 1);
   }
 
   // toggle light-dark theme
@@ -45,16 +67,14 @@ const App = () => {
     document.documentElement.setAttribute('data-theme', newTheme);
   }
 
+  // MODAL
+  // opens and closes modal window
   const [isOpen, setIsOpen] = useState(false);
 
-  const openModal = () => {
-    setIsOpen(true);
-  };
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
 
-  const closeModal = () => {
-    setIsOpen(false);
-  }
-
+  // JOB DETAILS PAGE
   // render Job Detail information
   const renderDetail = (props) => {
     const jobId = props.match.params.id;
@@ -73,7 +93,9 @@ const App = () => {
               jobs={jobs}
               searchChange={searchChange}
               search={search}
-              handleSearch={handleSearch}
+              page={page}
+              onPageChange={handlePageChange}
+              searchJobs={searchJobs}
               openModal={openModal}
             />
           </Route>
@@ -81,10 +103,14 @@ const App = () => {
         </Switch>
 
       </div>
-      <Modal isOpen={isOpen} closeModal={closeModal} />
+      <Modal
+        searchChange={searchChange}
+        search={search}
+        searchJobs={searchJobs}
+        isOpen={isOpen}
+        closeModal={closeModal} />
     </div>
   );
-
 };
 
 export default App;

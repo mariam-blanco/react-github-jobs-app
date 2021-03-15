@@ -1,4 +1,3 @@
-// const url = `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?page=${page}`;
 
 const getAllJobs = (/*  page */) => {
 
@@ -10,24 +9,16 @@ const getAllJobs = (/*  page */) => {
 
 };
 
-const getSearch = (search, page) => {
+const getSearch = (query) => {
+  const url = `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json${query}`;
 
-  let query = `&description=${search.terms}&location=${search.location}`;
-  search.isFullTime && (query += '&full_time=on');
+  console.log(url);
 
-  console.log(search);
-  console.log(query);
-
-  /*
-  return fetch(url + query)
+  return fetch(url)
     .then(response => response.json())
     .then(data => {
       return data;
     })
-  */
-
 };
-
-
 
 export { getAllJobs, getSearch };
