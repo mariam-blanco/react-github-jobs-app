@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/react-github-jobs-app/static/css/main.077d445e.chunk.css",
+    "main.js": "/react-github-jobs-app/static/js/main.349fae0f.chunk.js",
+    "main.js.map": "/react-github-jobs-app/static/js/main.349fae0f.chunk.js.map",
+    "runtime-main.js": "/react-github-jobs-app/static/js/runtime-main.3e91a1a4.js",
+    "runtime-main.js.map": "/react-github-jobs-app/static/js/runtime-main.3e91a1a4.js.map",
+    "static/js/2.7917f991.chunk.js": "/react-github-jobs-app/static/js/2.7917f991.chunk.js",
+    "static/js/2.7917f991.chunk.js.map": "/react-github-jobs-app/static/js/2.7917f991.chunk.js.map",
+    "index.html": "/react-github-jobs-app/index.html",
+    "static/css/main.077d445e.chunk.css.map": "/react-github-jobs-app/static/css/main.077d445e.chunk.css.map",
+    "static/js/2.7917f991.chunk.js.LICENSE.txt": "/react-github-jobs-app/static/js/2.7917f991.chunk.js.LICENSE.txt",
+    "static/media/MainDetails.scss": "/react-github-jobs-app/static/media/bg-pattern-detail-footer.439c5055.svg",
+    "static/media/App.scss": "/react-github-jobs-app/static/media/bg-pattern-header.f3307602.svg",
+    "static/media/SearchBox.scss": "/react-github-jobs-app/static/media/icon-check.7b769ecf.svg",
+    "static/media/icon-moon.038e80ca.svg": "/react-github-jobs-app/static/media/icon-moon.038e80ca.svg",
+    "static/media/icon-sun.9422c153.svg": "/react-github-jobs-app/static/media/icon-sun.9422c153.svg",
+    "static/media/logo.8c0b6449.svg": "/react-github-jobs-app/static/media/logo.8c0b6449.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3e91a1a4.js",
+    "static/js/2.7917f991.chunk.js",
+    "static/css/main.077d445e.chunk.css",
+    "static/js/main.349fae0f.chunk.js"
+  ]
+}
