@@ -1,7 +1,8 @@
 @import "../../styles/partials/core/mixins";
 
 .modal {
-  position: absolute; 
+  position: fixed;
+  z-index: 10; 
   left: 0;
   top: 0;
   width: 100vw;
@@ -24,10 +25,19 @@
     @include flex-sp(column);
     background-color: var(--card-bgc);
     
-    .location {
+    & > div  {
       height: 72px;
-      flex: 0;
+    }
+    
+    .search-field,
+    .search-btn {
       padding: 24px;
+    }
+    
+    .location {
+     
+      //flex: 0;
+      
       border-bottom: solid 1px rgba($dark-grey, 0.2);
       @include flex-sp(row);
       align-items: center;
@@ -40,19 +50,14 @@
       }
     } 
 
-    .button-box {
-      flex: 1;
-      @include flex-sp(column);
-      gap: 24px;
-      padding: 24px;   
+    .search-btn {
+      padding-top: 0;
       
-      .checkbox-wrapper {
-        display: block;
-      }
-      
-      .btn-search { 
+      .btn-search {   
         @include btn-primary(100%);
       }
+    
     }
+    
   }
 }

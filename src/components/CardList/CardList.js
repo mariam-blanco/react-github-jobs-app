@@ -6,10 +6,20 @@ const CardList = (props) => {
 
   const { jobs } = props;
 
+  const handleClick = (e) => {
+    e.preventDefault();
+  }
+  console.log(jobs.length);
+
   return (
-    <div className="cards-list">
-      {jobs.map(job => <Card key={job.id} job={job} />)}
-    </div>
+    <>
+      <div className="cards-list">
+        {jobs.map(job => <Card key={job.id} job={job} />)}
+      </div>
+      {jobs.length === 50
+        && <button onClick={handleClick} className="btn-primary">Load more</button>
+      }
+    </>
   );
 };
 

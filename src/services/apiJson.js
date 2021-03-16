@@ -9,10 +9,10 @@ const getAllJobs = (/*  page */) => {
 
 };
 
-const getSearch = (query) => {
-  const url = `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json${query}`;
+const getSearch = (queryStr) => {
+  const url = `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json${queryStr}`;
 
-  console.log(url);
+  console.log('Soy la url de la API: ', url);
 
   return fetch(url)
     .then(response => response.json())

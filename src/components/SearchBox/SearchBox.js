@@ -1,34 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import IconSearch from '../Icons/IconSearch';
-import IconLocation from '../Icons/IconLocation';
-import IconFilter from '../Icons/IconFilter';
+
 import './SearchBox.scss';
+import IconFilter from '../Icons/IconFilter';
+import IconSearch from '../Icons/IconSearch';
+import SearchTerms from '../SearchTerms/SearchTerms';
+import SearchLocation from '../SearchLocation/SearchLocation';
+import SearchType from '../SearchType/SearchType';
+import SearchButton from '../SearchButton/SearchButton';
+import Modal from '../Modal/Modal';
 
-const SearchBox = (props) => {
+const SearchBox = ({ updateQuery }) => {
 
-  const { searchChange, search, searchJobs, openModal } = props;
+  const [terms, setTerms] = useState('');
+  const [location, setLocation] = useState('');
+  const [isFullTime, setIsFullTime] = useState(false);
 
-  // SEARCH
-  // get search values and change search state
-  const handleChange = (e) => {
-    const value =
-      e.target.type === "checkbox"
-        ? e.target.checked
-        : e.target.value;
+  const changeTerms = (terms) => setTerms(terms);
+  const changeLocation = (location) => setLocation(location);
+  const changeType = (type) => setIsFullTime(type);
 
-    searchChange({
-      ...search,
-      [e.target.name]: value,
-    });
+  const handleClick = () => {
+    updateQuery(`&description=${terms}&location=${location}${!!isFullTime ? '&full_time=on' : ''}`)
   }
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    searchJobs();
-  }
+  // MODAL
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
+
 
   // PLACEHOLDER
-  // change placeholder text
   const [isSmallScreen, setIsSmallScreen] = useState(window.matchMedia('(max-width: 850px)').matches);
 
   useEffect(() => {
@@ -36,67 +38,46 @@ const SearchBox = (props) => {
     const updateIsSmallScreen = (e) => setIsSmallScreen(mediaQuery.matches);
     mediaQuery.addEventListener('change', updateIsSmallScreen);
 
-    // clean up addEventListener
     return () => {
       mediaQuery.removeEventListener('change', updateIsSmallScreen);
     }
   }, [isSmallScreen]);
 
   return (
-    <div className="search-box">
-      <form>
-        <div className="search-field terms">
-          <IconSearch fill="#5964E0" />
-          <input
-            name="terms"
-            value={search.terms}
-            onChange={handleChange}
-            type="text"
-            placeholder={
-              isSmallScreen
-                ? 'Filter by title...'
-                : 'Filter by title, companies, expertise...'}
-          />
+    <>
+      <div className="search-box">
+        <SearchTerms
+          terms={terms}
+          changeTerms={changeTerms}
+          isSmallScreen={isSmallScreen}
+        >
           <IconFilter openModal={openModal} />
-          <button onClick={handleClick} className="btn-search-sm">
+          <button className="btn-search-sm">
             <IconSearch fill="#fff" />
           </button>
+        </SearchTerms>
+        <SearchLocation
+          location={location}
+          changeLocation={changeLocation}
+        />
+        <SearchType
+          isFullTime={isFullTime}
+          changeType={changeType}
+          isSmallScreen={isSmallScreen}
+        />
+        <div className="search-btn">
+          <button onClick={handleClick} className="btn-search">Search</button>
         </div>
-        <div className="search-field location">
-          <IconLocation />
-          <input
-            name="location"
-            value={search.location}
-            onChange={handleChange}
-            type="text"
-            placeholder="Filter by location..."
-          />
-        </div>
-        <div className="button-box">
-          <label className="checkbox-wrapper">
-            <input
-              name="isFullTime"
-              checked={search.isFullTime}
-              onChange={handleChange}
-              type="checkbox"
-            />
-            <span className="checkmark"></span>
-            <span className="label">
-              {
-                isSmallScreen
-                  ? 'Full Time'
-                  : 'Full Time Only'
-              }
-            </span>
-          </label>
-
-          <div className="submit-btn">
-            <button onClick={handleClick} className="btn-search">Search</button>
-          </div>
-
-        </div>
-      </form>
-    </div>
+      </div>
+      <Modal
+        isOpen={isOpen}
+        closeModal={closeModal}
+      >
+        <SearchLocation />
+        <SearchType />
+        <SearchButton />
+      </Modal>
+    </>
   );
 };
 
