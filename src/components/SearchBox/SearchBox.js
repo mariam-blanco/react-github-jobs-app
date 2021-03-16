@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
-
 import './SearchBox.scss';
 import IconFilter from '../Icons/IconFilter';
 import IconSearch from '../Icons/IconSearch';
 import SearchTerms from '../SearchTerms/SearchTerms';
 import SearchLocation from '../SearchLocation/SearchLocation';
 import SearchType from '../SearchType/SearchType';
-import SearchButton from '../SearchButton/SearchButton';
 import Modal from '../Modal/Modal';
 
-const SearchBox = ({ updateQuery }) => {
+const SearchBox = ({ updateSearch }) => {
 
   const [terms, setTerms] = useState('');
   const [location, setLocation] = useState('');
@@ -19,8 +17,10 @@ const SearchBox = ({ updateQuery }) => {
   const changeLocation = (location) => setLocation(location);
   const changeType = (type) => setIsFullTime(type);
 
+  // a través de updateQuery se envían los nuevos parámetros de la queryString y 
+  // se actualiza en estado de la query, añadiéndole en número de página "page"
   const handleClick = () => {
-    updateQuery(`&description=${terms}&location=${location}${!!isFullTime ? '&full_time=on' : ''}`)
+    updateSearch(`&description=${terms}&location=${location}${!!isFullTime ? '&full_time=on' : ''}`)
   }
 
   // MODAL
@@ -40,8 +40,9 @@ const SearchBox = ({ updateQuery }) => {
 
     return () => {
       mediaQuery.removeEventListener('change', updateIsSmallScreen);
-    }
-  }, [isSmallScreen]);
+    };
+  }, []);
+
 
   return (
     <>
@@ -73,9 +74,17 @@ const SearchBox = ({ updateQuery }) => {
         isOpen={isOpen}
         closeModal={closeModal}
       >
-        <SearchLocation />
-        <SearchType />
-        <SearchButton />
+        <SearchLocation
+          location={location}
+          changeLocation={changeLocation}
+        />
+        <SearchType
+          isFullTime={isFullTime}
+          changeType={changeType}
+        />
+        <div className="search-btn">
+          <button onClick={handleClick} className="btn-search">Search</button>
+        </div>
       </Modal>
     </>
   );

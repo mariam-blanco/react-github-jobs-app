@@ -2,9 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Card.scss';
 
-const Card = (props) => {
-
-  const { job } = props;
+const Card = ({ job }) => {
 
   return (
     <div className="card">
@@ -20,7 +18,5 @@ const Card = (props) => {
     </div>
   );
 };
-
-
 
 export default Card;

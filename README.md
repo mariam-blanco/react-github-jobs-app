@@ -2,4 +2,5 @@
 ## SPA with React Hooks and React Router 
 ⚠️ **Not finished yet** ⚠️ 
 
-[mariam-blanco.github.io/react-github-jobs-app](https://mariam-blanco.github.io/react-github-jobs-app/)
+[react-github-jobs-app.herokuapp.com](https://react-github-jobs-app.herokuapp.com/)
+

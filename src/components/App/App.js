@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { getAllJobs, getSearch } from '../../services/apiJson';
-
+import getSearch from '../../services/api';
 import Header from '../Header/Header';
 import MainCards from '../MainCards/MainCards';
 import MainDetails from '../MainDetails/MainDetails';
@@ -13,38 +12,46 @@ const App = () => {
   const [query, setQuery] = useState('');
   const [jobs, setJobs] = useState([]);
 
-  const updateQuery = (params) => {
-    const newQuery = !!params ? `?page=${page}${params}` : `?page=${page}`;
+
+  // if there is a search it updates query state
+  const updateSearch = (newQuery) => {
+    setPage(1);
     setQuery(newQuery);
   }
 
+  const updatePage = () => {
+    setPage(page + 1);
+  }
+
   // API
+  // it runs 1) on page load, 2) when query changes, 3) when page changes. 
   useEffect(() => {
 
-    getSearch(query)
+    const APIquery = !!query ? `?page=${page}${query}` : `?page=${page}`;
+
+    getSearch(APIquery)
       .then(data => {
+        console.log(data);
         !!data && setJobs(data);
-        console.log('Query en useEffect 2!: ', query);
-        //!!data && setJobs(data) && setIsLoading(false);
-        //jobs.length === 50 && setPage(prev => prev + 1);
+        //!!data && setJobs(data) && setIsLoading(false);       
       });
 
-  }, [query]);
+  }, [query, page]);
 
 
-  // toggle light-dark theme
+  // TOOGLE light-dark theme
   const toggleTheme = (newTheme) => {
     document.documentElement.setAttribute('data-theme', newTheme);
   }
 
 
   // JOB DETAILS PAGE
-
   const renderDetail = (props) => {
     const jobId = props.match.params.id;
     const foundJob = jobs.find(job => job.id === jobId);
     return !!foundJob && <MainDetails job={foundJob} />
   };
+
 
   return (
     <div className="bg-container">
@@ -54,7 +61,8 @@ const App = () => {
           <Route exact path='/'>
             <MainCards
               jobs={jobs}
-              updateQuery={updateQuery}
+              updateSearch={updateSearch}
+              updatePage={updatePage}
             />
           </Route>
           <Route path='/positions/:id' component={renderDetail} />

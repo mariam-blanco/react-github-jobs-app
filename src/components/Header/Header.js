@@ -4,8 +4,7 @@ import './Header.scss';
 import logo from '../../images/desktop/logo.svg';
 import Switch from '../Switch/Switch';
 
-
-const Header = (props) => {
+const Header = ({ toggleTheme }) => {
 
   return (
     <header className="header">
@@ -14,7 +13,7 @@ const Header = (props) => {
           <img src={logo} alt="logo" />
         </Link>
       </div>
-      <Switch toggleTheme={props.toggleTheme} />
+      <Switch toggleTheme={toggleTheme} />
     </header>
   );
 };

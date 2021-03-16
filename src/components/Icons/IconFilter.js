@@ -1,13 +1,9 @@
 import React from 'react';
 
-const IconFilter = (props) => {
-
-  const { openModal } = props;
+const IconFilter = ({ openModal }) => {
 
   // OPEN MODAL
-  const handleOpen = () => {
-    openModal();
-  }
+  const handleOpen = () => openModal();
 
   return (
     <svg onClick={handleOpen} className="icon-filter" width="20" height="20" xmlns="http://www.w3.org/2000/svg">

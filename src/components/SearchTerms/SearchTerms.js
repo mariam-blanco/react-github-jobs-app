@@ -6,7 +6,6 @@ const SearchTerms = ({ terms, changeTerms, children, isSmallScreen }) => {
 
   const handleTerms = (e) => changeTerms(e.target.value);
 
-
   return (
     <div className="search-field terms">
       <IconSearch fill="#5964E0" />

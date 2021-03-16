@@ -1,8 +1,6 @@
 import React from 'react';
 
-const IconSearch = (props) => {
-
-  const { fill } = props;
+const IconSearch = ({ fill }) => {
 
   return (
     <svg className="icon-search" width="24" height="24" xmlns="http://www.w3.org/2000/svg">

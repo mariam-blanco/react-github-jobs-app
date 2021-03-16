@@ -1,13 +1,9 @@
 import React from 'react';
 import "./Switch.scss";
-
 import iconSun from '../../images/desktop/icon-sun.svg';
 import iconMoon from '../../images/desktop/icon-moon.svg';
 
-
-const Switch = (props) => {
-
-  const { toggleTheme } = props;
+const Switch = ({ toggleTheme }) => {
 
   const handleChange = (e) => {
     e.target.checked ? toggleTheme('dark') : toggleTheme('ligth');

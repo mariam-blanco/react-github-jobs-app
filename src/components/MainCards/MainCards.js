@@ -4,17 +4,17 @@ import SearchBox from '../SearchBox/SearchBox';
 import CardList from '../CardList/CardList';
 import Error from '../Error/Error';
 
-const MainCards = ({ jobs, updateQuery }) => {
+const MainCards = ({ jobs, updateSearch, updatePage }) => {
 
   return (
     <main className="main-index">
       <SearchBox
-        updateQuery={updateQuery}
+        updateSearch={updateSearch}
       />
       {
         jobs === 'undefined'
           ? <Error />
-          : <CardList jobs={jobs} />
+          : <CardList jobs={jobs} updatePage={updatePage} />
       }
     </main>
   );

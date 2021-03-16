@@ -1,9 +1,7 @@
 import React from 'react';
 import './Modal.scss';
 
-const Modal = (props) => {
-
-  const { isOpen, closeModal, children } = props;
+const Modal = ({ isOpen, closeModal, children }) => {
 
   // CLOSE MODAL
   const handleClose = (e) => {
