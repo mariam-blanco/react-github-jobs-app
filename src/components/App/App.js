@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import './App.scss';
 import getSearch from '../../services/api';
 import Header from '../Header/Header';
 import MainCards from '../MainCards/MainCards';
+import SearchBox from '../SearchBox/SearchBox';
+import CardList from '../CardList/CardList';
 import MainDetails from '../MainDetails/MainDetails';
-import './App.scss';
+import Loader from '../Loader/Loader';
+import Error from '../Error/Error';
+
 
 const App = () => {
 
+  const [jobs, setJobs] = useState([]);
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
-  const [jobs, setJobs] = useState([]);
 
 
   // if there is a search it updates query state
@@ -20,7 +27,7 @@ const App = () => {
   }
 
   const updatePage = () => {
-    setPage(page + 1);
+    setPage(prev => prev + 1);
   }
 
   // API
@@ -28,16 +35,27 @@ const App = () => {
   useEffect(() => {
 
     const APIquery = !!query ? `?page=${page}${query}` : `?page=${page}`;
-
+    setIsLoaded(false);
     getSearch(APIquery)
-      .then(data => {
-        console.log(data);
-        !!data && setJobs(data);
-        //!!data && setJobs(data) && setIsLoading(false);       
-      });
+      .then(
+        (data) => {
+          setIsLoaded(true);
+          if (page > 1) {
+            setJobs(prev => [...prev, ...data]);
 
+          } else {
+            setJobs(data);
+          }
+
+        },
+        (error) => {
+          setIsLoaded(true);
+          setError(error);
+        }
+      );
   }, [query, page]);
 
+  console.log(jobs);
 
   // TOOGLE light-dark theme
   const toggleTheme = (newTheme) => {
@@ -59,11 +77,13 @@ const App = () => {
         <Header toggleTheme={toggleTheme} />
         <Switch>
           <Route exact path='/'>
-            <MainCards
-              jobs={jobs}
-              updateSearch={updateSearch}
-              updatePage={updatePage}
-            />
+            <MainCards>
+              <SearchBox updateSearch={updateSearch} />
+              {error ? <Error />
+                : !isLoaded ? <Loader />
+                  : <CardList jobs={jobs} updatePage={updatePage}
+                  />}
+            </MainCards>
           </Route>
           <Route path='/positions/:id' component={renderDetail} />
         </Switch>
