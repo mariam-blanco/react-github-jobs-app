@@ -5,9 +5,9 @@ const Error = () => {
 
   return (
     <main className="main-error">
-      <div>
-        <p>Loading...</p>
-      </div>
+      <a href="https://cors-anywhere.herokuapp.com/corsdemo" target="_blank" rel='noreferrer'>
+        Request temporary access to the demo of CORS Anywhere
+      </a>
     </main>
 
   );

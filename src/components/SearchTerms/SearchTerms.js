@@ -1,7 +1,6 @@
 import React from 'react';
 import IconSearch from '../Icons/IconSearch';
 
-
 const SearchTerms = ({ terms, changeTerms, children, isSmallScreen }) => {
 
   const handleTerms = (e) => changeTerms(e.target.value);
