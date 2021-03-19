@@ -20,6 +20,7 @@ const App = () => {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
 
+
   // if there is a search it updates query state
   const updateSearch = (newQuery) => {
     setJobs([]);
@@ -33,8 +34,10 @@ const App = () => {
   useEffect(() => {
 
     const APIquery = !!query ? `?page=${page}${query}` : `?page=${page}`;
+    const url = `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json${APIquery}`;
     setIsLoaded(false);
-    getDataAPI(APIquery)
+    //const url = 'https://raw.githubusercontent.com/mariam-blanco/my-server/master/data.json';
+    getDataAPI(url)
       .then(
         (data) => {
           setIsLoaded(true);
@@ -60,9 +63,10 @@ const App = () => {
   // JOB DETAILS PAGE
   const renderDetail = (props) => {
     const jobId = props.match.params.id;
-    const foundJob = jobs.find(job => job.id === jobId);
+    const foundJob = (jobs.find(job => job.id === jobId));
     return !!foundJob && <MainDetails job={foundJob} />
   };
+
 
   // LOAD MORE BUTTON
   const handleLoadMore = () => {
@@ -74,7 +78,6 @@ const App = () => {
       {isLoaded ? "Load More" : <img src={spinner} alt="Loading..." />}
     </button>
   );
-
 
   const renderLoadMore = () => {
     const MAX_CARDS_PAGE = 50;

@@ -19,7 +19,8 @@ const SearchBox = ({ updateSearch }) => {
 
   // a través de updateQuery se envían los nuevos parámetros de la queryString y 
   // se actualiza en estado de la query, añadiéndole en número de página "page"
-  const handleClick = () => {
+  const handleClick = (e) => {
+    (e.target.name === "btnModal") && closeModal();
     updateSearch(`&description=${terms}&location=${location}${!!isFullTime ? '&full_time=on' : ''}`)
   }
 
@@ -83,7 +84,7 @@ const SearchBox = ({ updateSearch }) => {
           changeType={changeType}
         />
         <div className="search-btn">
-          <button onClick={handleClick} className="btn-search">Search</button>
+          <button name="btnModal" onClick={handleClick} className="btn-search">Search</button>
         </div>
       </Modal>
     </>
