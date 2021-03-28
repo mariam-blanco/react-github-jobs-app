@@ -1,7 +1,8 @@
 import React from 'react';
 import './Error.scss';
 
-const Error = () => {
+const Error = ({ error }) => {
+  console.log("Componente Error: ", error);
 
   return (
     <main className="main-error">

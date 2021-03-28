@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactHtmlParser from 'html-react-parser';
 import calculateTime from '../../services/calculateTime';
 import './MainDetails.scss';
@@ -13,6 +13,10 @@ const MainDetails = ({ job }) => {
     backgroundSize: 'cover',
     backgroundColor: '#fff',
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>

@@ -17,11 +17,20 @@ const SearchBox = ({ updateSearch }) => {
   const changeLocation = (location) => setLocation(location);
   const changeType = (type) => setIsFullTime(type);
 
+  const resetSearch = () => {
+    setTerms('');
+    setLocation('');
+    setIsFullTime(false);
+  }
+
   // a través de updateQuery se envían los nuevos parámetros de la queryString y 
   // se actualiza en estado de la query, añadiéndole en número de página "page"
   const handleClick = (e) => {
     (e.target.name === "btnModal") && closeModal();
-    updateSearch(`&description=${terms}&location=${location}${!!isFullTime ? '&full_time=on' : ''}`)
+    if (terms || location) {
+      updateSearch(`&description=${terms}&location=${location}${!!isFullTime ? '&full_time=on' : ''}`);
+    }
+    resetSearch();
   }
 
   // MODAL

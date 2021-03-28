@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import spinner from '../../images/desktop/Spinner-1s-48px.svg';
 import './App.scss';
@@ -15,7 +15,7 @@ import Error from '../Error/Error';
 const App = () => {
 
   const [jobs, setJobs] = useState([]);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
   const [isLoaded, setIsLoaded] = useState(false);
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
@@ -28,22 +28,21 @@ const App = () => {
     setQuery(newQuery);
   }
 
-
   // API
   // runs 1) on page load, 2) when query changes, 3) when page changes.  
   useEffect(() => {
-
-    const APIquery = !!query ? `?page=${page}${query}` : `?page=${page}`;
-    const url = `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json${APIquery}`;
     setIsLoaded(false);
+    const APIquery = !!query ? `?page=${page}${query}` : `?page=${page}`;
+    const url = `https://secure-crag-00895.herokuapp.com/https://jobs.github.com/positions.json${APIquery}`;
     //const url = 'https://raw.githubusercontent.com/mariam-blanco/my-server/master/data.json';
+    console.log(url);
     getDataAPI(url)
       .then(
         (data) => {
           setIsLoaded(true);
-          if (page > 1) {
-            setJobs(prev => [...prev, ...data]);
-          } else {
+          if (data) {
+            console.log(data);
+            (page > 1) && setJobs(prev => [...prev, ...data]);
             setJobs(data);
           }
         },
@@ -52,6 +51,7 @@ const App = () => {
           setError(error);
         }
       );
+
   }, [page, query]);
 
 
