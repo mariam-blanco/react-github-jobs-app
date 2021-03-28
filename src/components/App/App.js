@@ -35,13 +35,12 @@ const App = () => {
     const APIquery = !!query ? `?page=${page}${query}` : `?page=${page}`;
     const url = `https://secure-crag-00895.herokuapp.com/https://jobs.github.com/positions.json${APIquery}`;
     //const url = 'https://raw.githubusercontent.com/mariam-blanco/my-server/master/data.json';
-    console.log(url);
+
     getDataAPI(url)
       .then(
         (data) => {
           setIsLoaded(true);
           if (data) {
-            console.log(data);
             (page > 1) && setJobs(prev => [...prev, ...data]);
             setJobs(data);
           }
