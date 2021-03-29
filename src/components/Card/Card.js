@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import calculateTime from '../../services/calculateTime';
 import './Card.scss';
 
 const Card = ({ job }) => {
@@ -8,7 +9,7 @@ const Card = ({ job }) => {
     <div className="card">
       <div className="card-icon" style={{ backgroundImage: `url(${job.company_logo})` }}></div>
       <div className="card-content">
-        <p className="text-secondary">1w ago · {job.type}</p>
+        <p className="text-secondary">{calculateTime(job.created_at)} ago · {job.type}</p>
         <h3>
           <Link to={`/positions/${job.id}`}>{job.title}</Link>
         </h3>

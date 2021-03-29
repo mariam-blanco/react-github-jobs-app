@@ -9,16 +9,17 @@ import SearchBox from '../SearchBox/SearchBox';
 import CardList from '../CardList/CardList';
 import MainDetails from '../MainDetails/MainDetails';
 import Loader from '../Loader/Loader';
-import Error from '../Error/Error';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 
 const App = () => {
 
   const [jobs, setJobs] = useState([]);
-  const [error, setError] = useState('');
+  const [isError, setIsError] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
+
 
 
   // if there is a search it updates query state
@@ -29,28 +30,28 @@ const App = () => {
   }
 
   // API
-  // runs 1) on page load, 2) when query changes, 3) when page changes.  
+  // it runs --> 1) on page load, 2) when query changes, 3) when page changes.  
   useEffect(() => {
     setIsLoaded(false);
     const APIquery = !!query ? `?page=${page}${query}` : `?page=${page}`;
     const url = `https://secure-crag-00895.herokuapp.com/https://jobs.github.com/positions.json${APIquery}`;
-    //const url = 'https://raw.githubusercontent.com/mariam-blanco/my-server/master/data.json';
+    //const url = `https://jobs.github.com/positions.json${APIquery}`;
+    console.log(url);
 
     getDataAPI(url)
       .then(
         (data) => {
+          setIsError(false);
           setIsLoaded(true);
-          if (data) {
-            (page > 1) && setJobs(prev => [...prev, ...data]);
-            setJobs(data);
-          }
+          (data.length > 0 && page > 1)
+            ? setJobs(prev => [...prev, ...data])
+            : setJobs(data);
         },
         (error) => {
           setIsLoaded(true);
-          setError(error);
+          setIsError(true);
         }
       );
-
   }, [page, query]);
 
 
@@ -65,7 +66,6 @@ const App = () => {
     const foundJob = (jobs.find(job => job.id === jobId));
     return !!foundJob && <MainDetails job={foundJob} />
   };
-
 
   // LOAD MORE BUTTON
   const handleLoadMore = () => {
@@ -91,11 +91,14 @@ const App = () => {
           <Route exact path='/'>
             <MainCards>
               <SearchBox updateSearch={updateSearch} />
-              {!!error ? <Error /> : !isLoaded && <Loader />}
-              <CardList
-                jobs={jobs}
-                isLoaded={isLoaded}
-              />
+              {
+                !!isError
+                  ? <ErrorMessage message="Server error. Try again later." />
+                  : (isLoaded && !jobs.length)
+                    ? <ErrorMessage message="0 results. Try another search terms." />
+                    : (!isLoaded && <Loader />)
+              }
+              <CardList jobs={jobs} isLoaded={isLoaded} />
               {renderLoadMore()}
             </MainCards>
           </Route>

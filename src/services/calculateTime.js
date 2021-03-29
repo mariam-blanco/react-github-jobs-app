@@ -12,7 +12,7 @@ const calculateTime = (dateCreated) => {
     return `${days}d`;
   }
   const weeks = Math.floor(difference / (1000 * 3600 * 24 * 7));
-  if (weeks < 4) {
+  if (weeks <= 4) {
     return `${weeks}w`;
   }
   const months = Math.floor(difference / (1000 * 3600 * 24 * 30));

@@ -63,7 +63,7 @@ const SearchBox = ({ updateSearch }) => {
           isSmallScreen={isSmallScreen}
         >
           <IconFilter openModal={openModal} />
-          <button className="btn-search-sm">
+          <button onClick={handleClick} className="btn-search-sm">
             <IconSearch fill="#fff" />
           </button>
         </SearchTerms>
