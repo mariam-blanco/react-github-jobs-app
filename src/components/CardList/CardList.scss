@@ -10,4 +10,9 @@
     column-gap: 2%;
     row-gap: 49px;
   } 
+
+  @media only screen and (max-width: 576px) {
+    display: flex;
+    flex-direction: column;
+  } 
 }

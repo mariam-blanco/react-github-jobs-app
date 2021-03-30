@@ -8,6 +8,10 @@
   background-color: var(--card-bgc);
   padding: 49px 32px 32px;
 
+  @media only screen and (max-width: 576px) {
+    width: 100%;
+  } 
+
   &-icon {
     position: absolute;
     background-size: contain;
