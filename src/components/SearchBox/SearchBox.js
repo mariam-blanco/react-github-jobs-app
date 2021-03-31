@@ -26,6 +26,7 @@ const SearchBox = ({ updateSearch }) => {
   // a través de updateQuery se envían los nuevos parámetros de la queryString y 
   // se actualiza en estado de la query, añadiéndole en número de página "page"
   const handleSubmit = (e) => {
+    !!isOpen && closeModal();
     e.preventDefault();
     (e.target.name === "btnModal") && closeModal();
     if (terms || location) {
@@ -33,9 +34,9 @@ const SearchBox = ({ updateSearch }) => {
     }
     resetSearch();
   }
-  const handleClick = () => {
-    closeModal();
-  }
+  //const handleClick = () => {
+  //  closeModal();
+  //}
 
   // MODAL
   const [isOpen, setIsOpen] = useState(false);
@@ -99,7 +100,7 @@ const SearchBox = ({ updateSearch }) => {
             changeType={changeType}
           />
           <div className="search-btn">
-            <button name="btnModal" onClick={handleClick} className="btn-search">Search</button>
+            <button name="btnModal" className="btn-search">Search</button>
           </div>
         </Modal>
       </form>
