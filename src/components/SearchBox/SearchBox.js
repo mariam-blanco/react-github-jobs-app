@@ -34,9 +34,6 @@ const SearchBox = ({ updateSearch }) => {
     }
     resetSearch();
   }
-  //const handleClick = () => {
-  //  closeModal();
-  //}
 
   // MODAL
   const [isOpen, setIsOpen] = useState(false);
