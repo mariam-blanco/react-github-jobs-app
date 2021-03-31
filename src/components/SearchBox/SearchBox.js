@@ -25,12 +25,16 @@ const SearchBox = ({ updateSearch }) => {
 
   // a través de updateQuery se envían los nuevos parámetros de la queryString y 
   // se actualiza en estado de la query, añadiéndole en número de página "page"
-  const handleClick = (e) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     (e.target.name === "btnModal") && closeModal();
     if (terms || location) {
       updateSearch(`&description=${terms}&location=${location}${!!isFullTime ? '&full_time=on' : ''}`);
     }
     resetSearch();
+  }
+  const handleClick = () => {
+    closeModal();
   }
 
   // MODAL
@@ -56,46 +60,49 @@ const SearchBox = ({ updateSearch }) => {
 
   return (
     <>
-      <div className="search-box">
-        <SearchTerms
-          terms={terms}
-          changeTerms={changeTerms}
-          isSmallScreen={isSmallScreen}
+      <form onSubmit={handleSubmit} className="form">
+        <div className="search-box">
+
+          <SearchTerms
+            terms={terms}
+            changeTerms={changeTerms}
+            isSmallScreen={isSmallScreen}
+          >
+            <IconFilter openModal={openModal} />
+            <button className="btn-search-sm">
+              <IconSearch fill="#fff" />
+            </button>
+          </SearchTerms>
+          <SearchLocation
+            location={location}
+            changeLocation={changeLocation}
+          />
+          <SearchType
+            isFullTime={isFullTime}
+            changeType={changeType}
+            isSmallScreen={isSmallScreen}
+          />
+          <div className="search-btn">
+            <button className="btn-search">Search</button>
+          </div>
+        </div>
+        <Modal
+          isOpen={isOpen}
+          closeModal={closeModal}
         >
-          <IconFilter openModal={openModal} />
-          <button onClick={handleClick} className="btn-search-sm">
-            <IconSearch fill="#fff" />
-          </button>
-        </SearchTerms>
-        <SearchLocation
-          location={location}
-          changeLocation={changeLocation}
-        />
-        <SearchType
-          isFullTime={isFullTime}
-          changeType={changeType}
-          isSmallScreen={isSmallScreen}
-        />
-        <div className="search-btn">
-          <button onClick={handleClick} className="btn-search">Search</button>
-        </div>
-      </div>
-      <Modal
-        isOpen={isOpen}
-        closeModal={closeModal}
-      >
-        <SearchLocation
-          location={location}
-          changeLocation={changeLocation}
-        />
-        <SearchType
-          isFullTime={isFullTime}
-          changeType={changeType}
-        />
-        <div className="search-btn">
-          <button name="btnModal" onClick={handleClick} className="btn-search">Search</button>
-        </div>
-      </Modal>
+          <SearchLocation
+            location={location}
+            changeLocation={changeLocation}
+          />
+          <SearchType
+            isFullTime={isFullTime}
+            changeType={changeType}
+          />
+          <div className="search-btn">
+            <button name="btnModal" onClick={handleClick} className="btn-search">Search</button>
+          </div>
+        </Modal>
+      </form>
     </>
   );
 };

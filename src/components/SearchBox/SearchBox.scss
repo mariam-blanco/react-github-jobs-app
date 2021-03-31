@@ -1,5 +1,6 @@
 @import "../../styles/partials/core/mixins";
 
+.form  { width: 100%; }
 .search-box {
   width: 100%;
   margin-bottom: 80px;
@@ -82,15 +83,12 @@
     @media only screen and (max-width: 576px) { display: none; } 
   }
 
-  .type {
-    
+  .type {   
     flex: 0;
     padding-right: 24px;
     @media only screen and (max-width: 576px) { display: none; } 
   }
   
-
-
   .checkbox-wrapper {
     width: max-content;
     position: relative;
@@ -121,8 +119,7 @@
     }
 
     .label {
-      margin-left: 40px;
-      
+      margin-left: 40px;      
     } 
   }
 
