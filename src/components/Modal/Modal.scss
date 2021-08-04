@@ -2,21 +2,21 @@
 
 .modal {
   position: fixed;
-  z-index: 10; 
+  z-index: 10;
   left: 0;
   top: 0;
   width: 100vw;
   height: 100vh;
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
-  overflow: auto; 
-  background-color: rgba(0,0,0,0.5); 
-  
-  @media only screen and (min-width: 576px) { 
-    display: none; 
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  @media only screen and (min-width: 576px) {
+    display: none;
   }
-  
+
   &-container {
     position: fixed;
     left: 24px;
@@ -24,73 +24,71 @@
     width: auto;
     @include flex-sp(column);
     background-color: var(--card-bgc);
-    
-    & > div  {
+
+    & > div {
       height: 72px;
     }
-    
+
     .search-field,
     .search-btn {
       padding: 24px;
     }
-    
-    .location {      
+
+    .location {
       border-bottom: solid 1px rgba($dark-grey, 0.2);
       @include flex-sp(row);
       align-items: center;
-      
+
       input {
         background-color: transparent;
         width: 100%;
         flex: 1;
-        border:0;
+        border: 0;
         margin-left: 16px;
       }
-    } 
+    }
 
     .checkbox-wrapper {
-      
       @include flex-sp(row);
       align-items: center;
-      
+
       width: max-content;
       position: relative;
       margin-right: 0;
-  
-      input { 
-      position: absolute;
-      opacity: 0;
-  
-        & + span.checkmark {
+
+      input {
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 24px;
-        height: 24px;
-        border-radius: 3px;
-        background-color: var(--checkbox-bgc);
+        opacity: 0;
+
+        & + span.checkmark {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 24px;
+          height: 24px;
+          border-radius: 3px;
+          background-color: var(--checkbox-bgc);
         }
-  
+
         & + span.checkmark:hover {
           background-color: var(--checkbox-bgc-hover);
         }
-  
+
         &:checked + span.checkmark {
           background: url(../../images/desktop/icon-check.svg) center no-repeat
             var(--checkbox-bgc-checked);
         }
       }
-  
+
       .label {
         margin-left: 40px;
-        
-      } 
+      }
     }
 
     .search-btn {
       padding-top: 0;
-      
-      .btn-search {   
+
+      .btn-search {
         @include btn-primary(100%);
       }
     }

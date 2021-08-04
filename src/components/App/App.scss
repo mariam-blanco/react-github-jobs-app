@@ -52,7 +52,7 @@ body {
     background-size: 100% 162px;
 
     @media only screen and (max-width: 780px) {
-      background: url(../../images/tablet/bg-pattern-header.svg);    
+      background: url(../../images/tablet/bg-pattern-header.svg);
       background-repeat: no-repeat;
     }
 
@@ -69,7 +69,6 @@ body {
     }
 
     .page-container {
-      
       width: 100%;
       max-width: 1110px;
       display: flex;
@@ -102,4 +101,3 @@ body {
 .btn-secondary {
   @include btn-secondary();
 }
-

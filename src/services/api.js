@@ -1,13 +1,14 @@
+const getAllJobs = () => {
 
-const getDataAPI = (url) => {
-
-  return fetch(url)
-    .then(response => {
+  return fetch(
+    "https://raw.githubusercontent.com/mariam-blanco/server-02/main/db.json"
+  )
+    .then((response) => {
       return response.json();
     })
-    .then(data => {
+    .then((data) => {
       return data;
-    })
+    });
 };
 
-export default getDataAPI;
+export default getAllJobs;

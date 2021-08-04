@@ -1,47 +1,46 @@
 // --- Primary colors --------------- //
 
-$violet:              #5964E0;
-$light-violet:        #939BF4;
-$dark-blue:           #19202D;
-$midnight:            #121721;
+$violet: #5964e0;
+$light-violet: #939bf4;
+$dark-blue: #19202d;
+$midnight: #121721;
 
 // --- Secondary colors --------------- //
 
-$white:                #FFFFFF;
-$light-grey:           #F4F6F8;
-$grey:                 #9DAEC2;
-$dark-grey:            #6E8098;
+$white: #ffffff;
+$light-grey: #f4f6f8;
+$grey: #9daec2;
+$dark-grey: #6e8098;
 
-$body-bgc:             #F2F2F2;
-$card-bgc:             $white;
+$body-bgc: #f2f2f2;
+$card-bgc: $white;
 //$details-bgc:        $white;
 
-$text-color:           $dark-grey;
-$text-secondary:       $dark-grey;
+$text-color: $dark-grey;
+$text-secondary: $dark-grey;
 //$details-link-color: $violet;
-$hd-color:             $dark-blue;
-$placeholder:          rgba($dark-blue, 0.5);
+$hd-color: $dark-blue;
+$placeholder: rgba($dark-blue, 0.5);
 
 // --- Dark Mode ---------------------- //
 
-$dark-body-bgc:        $midnight;
-$dark-card-bgc:        $dark-blue;
+$dark-body-bgc: $midnight;
+$dark-card-bgc: $dark-blue;
 //$dark-details-bgc:   $dark-blue;
 
-$dark-text-color:      $grey;
-$dark-text-secondary:  $dark-grey;
+$dark-text-color: $grey;
+$dark-text-secondary: $dark-grey;
 $dark-details-link-color: $grey;
-$dark-hd-color:        $white; 
-$dark-placeholder:     rgba($white, 0.5);
+$dark-hd-color: $white;
+$dark-placeholder: rgba($white, 0.5);
 
-$text-white:           $white;
+$text-white: $white;
 
-$primary-color:        $violet;
-$primary-color-l:      $light-violet;
+$primary-color: $violet;
+$primary-color-l: $light-violet;
 
-$checkbox-bgc:         rgba($dark-blue, 0.1);
-$checkbox-bgc-hover:   rgba($violet, 0.25);
+$checkbox-bgc: rgba($dark-blue, 0.1);
+$checkbox-bgc-hover: rgba($violet, 0.25);
 $checkbox-bgc-checked: $violet;
 
-$dark-checkbox-bgc:         rgba($white, 0.1);
-
+$dark-checkbox-bgc: rgba($white, 0.1);

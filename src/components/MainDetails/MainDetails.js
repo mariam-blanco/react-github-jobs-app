@@ -1,18 +1,15 @@
-import React, { useEffect } from 'react';
-import ReactHtmlParser from 'html-react-parser';
-import calculateTime from '../../services/calculateTime';
-import './MainDetails.scss';
+import React, { useEffect } from "react";
+import "./MainDetails.scss";
 
 const MainDetails = ({ job }) => {
-
-  const descriptionHtml = ReactHtmlParser(job.description);
-  const howToApplyHtml = ReactHtmlParser(job.how_to_apply);
-
   const bgIcon = {
-    backgroundImage: `url(${job.company_logo})`,
-    backgroundSize: 'cover',
-    backgroundColor: '#fff',
-  }
+    backgroundImage: `url(../../images/logos/${job.logo})`,
+    backgroundSize: "cover",
+    backgroundColor: job.logoBackground,
+  };
+
+  const requirementsList = job.requirements.items;
+  const roleList = job.role.items;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -22,49 +19,61 @@ const MainDetails = ({ job }) => {
     <>
       <main className="main-details">
         <div className="heading">
-          <div
-            className="heading-icon"
-            style={bgIcon}>
-          </div>
+          <div className="heading-icon" style={bgIcon}></div>
           <div className="heading-body">
             <h2>{job.company}</h2>
-            {!!job.company_url && <p className="text-secondary">{job.company_url}</p>}
+            {!!job.website && <p className="text-secondary">{job.website}</p>}
           </div>
-          {
-            !!job.company_url
-            && <a href={job.company_url} target="_blank" rel="noreferrer">
+          {!!job.website && (
+            <a href={job.website} target="_blank" rel="noreferrer">
               <button className="btn-secondary">Company Site</button>
             </a>
-          }
+          )}
         </div>
         <div className="content">
           <div className="content-header">
             <div>
-              <p className="text-secondary">{calculateTime(job.created_at)} ago · {job.type}</p>
-              <h1>{job.title}</h1>
+              <p className="text-secondary">
+                {job.postedAt} · {job.contract}
+              </p>
+              <h1>{job.position}</h1>
               <h4 className="primary-color">{job.location}</h4>
             </div>
-            <a href={job.url} target="_blank" rel="noreferrer">
+            <a href={job.apply} target="_blank" rel="noreferrer">
               <button className="btn-primary">Apply Now</button>
             </a>
           </div>
-
           <div className="content-body">
-            {descriptionHtml}
+            <section>
+              <p>{job.description}</p>
+            </section>
+            <section>
+              <h3>Requirements</h3>
+              <p>{job.requirements.content}</p>
+              <ul>
+                {requirementsList.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </section>
+            <section>
+              <h3>What You Will Do</h3>
+              <p>{job.role.content}</p>
+              <ol>
+                {roleList.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ol>
+            </section>
           </div>
-        </div>
-
-        <div className="apply-box">
-          <h3>How to Apply</h3>
-          <p className="body-text">{howToApplyHtml}</p>
         </div>
       </main>
       <div className="footer">
         <div>
-          <h3>{job.title}</h3>
+          <h3>{job.position}</h3>
           <p>{job.company}</p>
         </div>
-        <a href={job.url} target="_blank" rel="noreferrer">
+        <a href={job.apply} target="_blank" rel="noreferrer">
           <button className="btn-primary">Apply Now</button>
         </a>
       </div>

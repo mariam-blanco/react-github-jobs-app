@@ -1,7 +1,6 @@
-import React from 'react';
+import React from "react";
 
 const SearchType = ({ isFullTime, changeType, isSmallScreen }) => {
-
   const handleType = (e) => changeType(e.target.checked);
 
   return (
@@ -15,11 +14,7 @@ const SearchType = ({ isFullTime, changeType, isSmallScreen }) => {
         />
         <span className="checkmark"></span>
         <span className="label">
-          {
-            isSmallScreen
-              ? 'Full Time'
-              : 'Full Time Only'
-          }
+          {isSmallScreen ? "Full Time" : "Full Time Only"}
         </span>
       </label>
     </div>

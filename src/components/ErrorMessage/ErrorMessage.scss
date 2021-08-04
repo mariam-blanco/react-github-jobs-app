@@ -1,20 +1,19 @@
 @import "../../styles/partials/core/mixins";
 
-.main-error {  
+.main-error {
   margin-bottom: 32px;
   margin-top: 32px;
   padding: 48px 48px 48px 42px;
   background-color: var(--card-bgc);
-  
+
   border-radius: 6px;
-  
+
   a {
     color: $primary-color;
     font-weight: 700;
   }
-  
+
   @media only screen and (max-width: 576px) {
     padding: 40px 24px 32px;
   }
-  
 }

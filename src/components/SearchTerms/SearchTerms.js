@@ -1,8 +1,7 @@
-import React from 'react';
-import IconSearch from '../Icons/IconSearch';
+import React from "react";
+import IconSearch from "../Icons/IconSearch";
 
 const SearchTerms = ({ terms, changeTerms, children, isSmallScreen }) => {
-
   const handleTerms = (e) => changeTerms(e.target.value);
 
   return (
@@ -15,8 +14,9 @@ const SearchTerms = ({ terms, changeTerms, children, isSmallScreen }) => {
         type="text"
         placeholder={
           isSmallScreen
-            ? 'Filter by title...'
-            : 'Filter by title, companies, expertise...'}
+            ? "Filter by title..."
+            : "Filter by title, companies, expertise..."
+        }
       />
       {children}
     </div>
