@@ -4,7 +4,7 @@ import "./MainDetails.scss";
 const MainDetails = ({ job }) => {
   const bgIcon = {
     backgroundImage: `url(../../images/logos/${job.logo})`,
-    backgroundSize: "cover",
+    //backgroundSize: "cover",
     backgroundColor: job.logoBackground,
   };
 

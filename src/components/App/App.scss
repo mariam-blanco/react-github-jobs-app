@@ -51,12 +51,12 @@ body {
     background-repeat: no-repeat;
     background-size: 100% 162px;
 
-    @media only screen and (max-width: 780px) {
+    @include media-query-tablet {
       background: url(../../images/tablet/bg-pattern-header.svg);
       background-repeat: no-repeat;
     }
 
-    @media only screen and (max-width: 576px) {
+    @include media-query-mobile {
       padding: 0 24px;
       background: url(../../images/mobile/bg-pattern-header.svg);
       background-repeat: no-repeat;

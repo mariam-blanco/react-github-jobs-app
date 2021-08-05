@@ -29,11 +29,13 @@ const SearchBox = ({ updateSearch }) => {
     e.preventDefault();
     e.target.name === "btnModal" && closeModal();
     if (terms || location) {
-      updateSearch(
-        `&description=${terms}&location=${location}${
-          !!isFullTime ? "&full_time=on" : ""
-        }`
-      );
+      
+      const query = {
+        terms,
+        location,
+        isFullTime: !!isFullTime ? true : false
+      }; 
+      updateSearch(query);
     }
     resetSearch();
   };

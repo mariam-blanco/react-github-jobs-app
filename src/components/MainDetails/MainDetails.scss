@@ -41,9 +41,12 @@
     height: 140px;
     width: 140px;
     border-bottom-left-radius: 6px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
 
     @media only screen and (max-width: 640px) {
-      @include icon-sm($white);
+      @include icon-sm();
     }
   }
 

@@ -27,12 +27,13 @@
   );
 }
 
-@mixin icon-sm($bgc) {
+@mixin icon-sm() {
   position: absolute;
   top: -25px;
   width: 50px;
   height: 50px;
-  background-color: $bgc;
+  background-repeat: no-repeat;
+  background-position: center;
   border-radius: 15px;
 }
 
@@ -40,4 +41,22 @@
   display: flex;
   flex-direction: $direction;
   justify-content: space-between;
+}
+
+@mixin media-query-desktop {
+  @media only screen and (min-width: 780px) {
+    @content;
+  }
+}
+
+@mixin media-query-tablet {
+  @media only screen and (max-width: 780px) {
+    @content;
+  }
+}
+
+@mixin media-query-mobile {
+  @media only screen and (max-width: 576px) {
+    @content;
+  }
 }

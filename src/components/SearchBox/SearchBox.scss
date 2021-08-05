@@ -12,10 +12,10 @@
   background-color: var(--card-bgc);
   border-radius: 6px;
 
-  @media only screen and (max-width: 780px) {
+  @include media-query-tablet {
     margin-bottom: 70px;
   }
-  @media only screen and (max-width: 576px) {
+  @include media-query-mobile {
     margin-bottom: 57px;
   }
 
@@ -44,7 +44,7 @@
       text-overflow: ellipsis;
       background-color: transparent;
 
-      @media only screen and (max-width: 576px) {
+      @include media-query-mobile {
         margin-left: 0;
       }
     }
@@ -56,7 +56,7 @@
     @media only screen and (max-width: 900px) {
       flex: 1;
     }
-    @media only screen and (max-width: 576px) {
+    @include media-query-mobile {
       border-right: 0;
 
       .icon-search {
@@ -70,7 +70,7 @@
     .icon-filter {
       display: none;
       margin-right: 14px;
-      @media only screen and (max-width: 576px) {
+      @include media-query-mobile {
         display: inline;
       }
     }

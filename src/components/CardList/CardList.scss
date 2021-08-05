@@ -1,3 +1,5 @@
+@import "../../styles/partials/core/mixins";
+
 .cards-list {
   width: 100%;
   display: grid;
@@ -6,12 +8,11 @@
   row-gap: 65px;
   margin-bottom: 42px;
 
-  @media only screen and (max-width: 780px) {
+  @include media-query-tablet {
     column-gap: 2%;
     row-gap: 49px;
   }
-
-  @media only screen and (max-width: 576px) {
+  @include media-query-mobile {
     display: flex;
     flex-direction: column;
   }

@@ -9,42 +9,55 @@ import SearchBox from "../SearchBox/SearchBox";
 import CardList from "../CardList/CardList";
 import MainDetails from "../MainDetails/MainDetails";
 import Loader from "../Loader/Loader";
-import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import NetworkError from "../NetworkError/NetworkError";
+import NoResults from "../NoResults/NoResults";
+import NotFound from "../NotFound/NotFound";
 
 const App = () => {
-  const [jobs, setJobs] = useState([]);
+  const [allJobs, setAllJobs] = useState([]);
+  const [filteredJobs, setFilteredJobs] = useState(allJobs); 
   const [isError, setIsError] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   //const [page, setPage] = useState(1);
-  const [query, setQuery] = useState("");
 
-  // if there is a search it updates query state
-  const updateSearch = (newQuery) => {
-    setJobs([]);
-    //setPage(1);
-    setQuery(newQuery);
+  
+  const filterJobs = (query) => {
+
+    const { terms, location, isFullTime} = query; 
+ 
+    let filtered = allJobs;
+    
+    if(terms) {
+      filtered = filtered.filter(job => 
+        job.position.toLowerCase().includes(terms.toLowerCase()));
+    }
+    if(location) {
+      filtered = filtered.filter(job => 
+        job.location.toLowerCase() === location.toLowerCase());
+    }
+    if(isFullTime) {
+      filtered = filtered.filter(job => job.contract === "Full Time");      
+    } 
+    setFilteredJobs(filtered);  
   };
-
+  
   // API
   // it runs --> 1) on page load, 2) when query changes, 3) when page changes.
   useEffect(() => {
     setIsLoaded(false);
-    //const APIquery = !!query ? `?page=${page}${query}` : `?page=${page}`;
-    //const url = `https://secure-crag-00895.herokuapp.com/https://jobs.github.com/positions.json${APIquery}`;
-    //const url = `https://jobs.github.com/positions.json${APIquery}`;
-
     getAllJobs().then(
       (data) => {
         setIsError(false);
         setIsLoaded(true);
-        data.length > 0 ? setJobs((prev) => [...prev, ...data]) : setJobs(data);
+        setAllJobs(data);
+        setFilteredJobs(data);         
       },
       (error) => {
         setIsLoaded(true);
         setIsError(true);
       }
     );
-  }, [query]);
+  }, []);
 
   // TOOGLE light-dark theme
   const toggleTheme = (newTheme) => {
@@ -53,9 +66,9 @@ const App = () => {
 
   // JOB DETAILS PAGE
   const renderDetail = (props) => {
-    const jobId = parseInt(props.match.params.id);
-    const foundJob = jobs.find((job) => job.id === jobId);
-    return !!foundJob && <MainDetails job={foundJob} />;
+    const jobId = props.match.params.id;
+    const foundJob = filteredJobs.find((job) => job.id === parseInt(jobId));
+    return foundJob ? <MainDetails job={foundJob} /> : <NotFound />;
   };
 
   // LOAD MORE BUTTON
@@ -81,15 +94,15 @@ const App = () => {
         <Switch>
           <Route exact path="/">
             <MainCards>
-              <SearchBox updateSearch={updateSearch} />
+              <SearchBox updateSearch={filterJobs} />
               {!!isError ? (
-                <ErrorMessage message="Server error. Try again later." />
-              ) : isLoaded && !jobs.length ? (
-                <ErrorMessage message="0 results. Try another search terms." />
+                <NetworkError message="Server error. Try again later." />
+              ) : isLoaded && !filteredJobs.length ? (
+                <NoResults message="0 results. Try another search terms." />
               ) : (
                 !isLoaded && <Loader />
               )}
-              <CardList jobs={jobs} isLoaded={isLoaded} />
+              <CardList jobs={filteredJobs} isLoaded={isLoaded} />
               {/*renderLoadMore()*/}
             </MainCards>
           </Route>
