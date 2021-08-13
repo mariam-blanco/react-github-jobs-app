@@ -9,54 +9,53 @@ import SearchBox from "../SearchBox/SearchBox";
 import CardList from "../CardList/CardList";
 import MainDetails from "../MainDetails/MainDetails";
 import Loader from "../Loader/Loader";
-import NetworkError from "../NetworkError/NetworkError";
-import NoResults from "../NoResults/NoResults";
-import NotFound from "../NotFound/NotFound";
+import NetworkError from "../Error/NetworkError";
+import NoResults from "../Error/NoResults";
+import NotFound from "../Error/NotFound";
 
 const App = () => {
   const [allJobs, setAllJobs] = useState([]);
-  const [filteredJobs, setFilteredJobs] = useState(allJobs); 
+  const [filteredJobs, setFilteredJobs] = useState(allJobs);
   const [isError, setIsError] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   //const [page, setPage] = useState(1);
 
-  
   const filterJobs = (query) => {
+    const { terms, location, isFullTime } = query;
 
-    const { terms, location, isFullTime} = query; 
- 
     let filtered = allJobs;
-    
-    if(terms) {
-      filtered = filtered.filter(job => 
-        job.position.toLowerCase().includes(terms.toLowerCase()));
+
+    if (terms) {
+      filtered = filtered.filter((job) =>
+        job.position.toLowerCase().includes(terms.toLowerCase())
+      );
     }
-    if(location) {
-      filtered = filtered.filter(job => 
-        job.location.toLowerCase() === location.toLowerCase());
+    if (location) {
+      filtered = filtered.filter(
+        (job) => job.location.toLowerCase() === location.toLowerCase()
+      );
     }
-    if(isFullTime) {
-      filtered = filtered.filter(job => job.contract === "Full Time");      
-    } 
-    setFilteredJobs(filtered);  
+    if (isFullTime) {
+      filtered = filtered.filter((job) => job.contract === "Full Time");
+    }
+    setFilteredJobs(filtered);
   };
-  
+
   // API
-  // it runs --> 1) on page load, 2) when query changes, 3) when page changes.
+  // it runs on page load.
   useEffect(() => {
     setIsLoaded(false);
-    getAllJobs().then(
-      (data) => {
+    getAllJobs()
+      .then((data) => {
         setIsError(false);
         setIsLoaded(true);
         setAllJobs(data);
-        setFilteredJobs(data);         
-      },
-      (error) => {
+        setFilteredJobs(data);
+      })
+      .catch(() => {
         setIsLoaded(true);
-        setIsError(true);
-      }
-    );
+        setIsError(true); // network error
+      });
   }, []);
 
   // TOOGLE light-dark theme
@@ -92,13 +91,14 @@ const App = () => {
       <div className="page-container">
         <Header toggleTheme={toggleTheme} />
         <Switch>
+          <Route path="/positions/:id" component={renderDetail} />
           <Route exact path="/">
             <MainCards>
               <SearchBox updateSearch={filterJobs} />
               {!!isError ? (
-                <NetworkError message="Server error. Try again later." />
+                <NetworkError />
               ) : isLoaded && !filteredJobs.length ? (
-                <NoResults message="0 results. Try another search terms." />
+                <NoResults />
               ) : (
                 !isLoaded && <Loader />
               )}
@@ -106,7 +106,7 @@ const App = () => {
               {/*renderLoadMore()*/}
             </MainCards>
           </Route>
-          <Route path="/positions/:id" component={renderDetail} />
+          <Route component={NotFound} />
         </Switch>
       </div>
     </div>

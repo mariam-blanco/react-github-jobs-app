@@ -1,5 +1,4 @@
 const getAllJobs = () => {
-
   return fetch(
     "https://raw.githubusercontent.com/mariam-blanco/server-02/main/db.json"
   )

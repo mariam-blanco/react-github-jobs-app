@@ -19,14 +19,5 @@
   &-content {
     @include flex-sp(column);
     height: 95px;
-
-    a {
-      text-decoration: none;
-      color: var(--hd-color);
-
-      &:hover {
-        color: var(--text-secondary);
-      }
-    }
   }
 }

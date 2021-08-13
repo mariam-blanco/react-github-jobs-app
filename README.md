@@ -1,11 +1,11 @@
 # GitHub Jobs API App: SPA with React Hooks and React Router
 
-Note: This used to be the GitHub Jobs API challenge. Unfortunately, that API was deprecated, so db.json was created with a similar data structure.
+⚠️ Note: GitHub Jobs is deprecated! It will shut down entirely on August 19, 2021. A db.json file was created with a similar data structure. ⚠️
+
+## Introducción
 
 - Ver en: [react-github-jobs-app.herokuapp.com](https://react-github-jobs-app.herokuapp.com/)
 - Misma app en Javascript Vanilla: [github-jobs-api-app](https://github.com/mariam-blanco/github-jobs-api-app)
-
-## Introducción
 
 GitHub Jobs API App es una aplicación que se desarrolla para practicar los lenguajes y tecnologías de front-end. Se hace a partir en uno de los "retos" de la web Frontend Mentor, que ofrece los diseños, imágenes... necesarios para construir proyectos reales.
 

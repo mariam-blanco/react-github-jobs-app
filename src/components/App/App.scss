@@ -101,3 +101,34 @@ body {
 .btn-secondary {
   @include btn-secondary();
 }
+
+//----------- #Errors -------------//
+
+.main-error {
+  margin-top: 100px;
+}
+
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  h1 {
+    font-weight: 400;
+    //margin-bottom: 24px;
+  }
+  div {
+    text-align: center;
+  }
+  img {
+    margin-top: 32px;
+  }
+  a {
+    text-decoration: none;
+    color: $primary-color;
+
+    &:hover {
+      color: $primary-color-l;
+    }
+  }
+}

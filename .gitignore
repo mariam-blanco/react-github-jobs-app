@@ -1,2 +1,8 @@
-/node_modules
-/src/assets/assets-local
+node_modules
+src/assets/assets-local
+.cache/
+dist/
+.env
+.DS_Store
+coverage/
+.vscode/
