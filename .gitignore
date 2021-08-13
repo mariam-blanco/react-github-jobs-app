@@ -1,8 +1,8 @@
 node_modules
+.DS_Store
 src/assets/assets-local
 .cache/
 dist/
 .env
-.DS_Store
 coverage/
 .vscode/
