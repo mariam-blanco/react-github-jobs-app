@@ -1,6 +1,5 @@
 {
   "name": "react-github-jobs-app",
-  "homepage": "https://react-github-jobs-app.herokuapp.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
