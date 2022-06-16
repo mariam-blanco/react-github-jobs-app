@@ -1,13 +1,11 @@
 const getAllJobs = () => {
-  return fetch(
-    "https://raw.githubusercontent.com/mariam-blanco/server-github-jobs/main/db.json"
-  )
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      return data;
-    });
+   return fetch('https://fake-server-github-jobs-app.herokuapp.com/jobs')
+      .then(response => {
+         return response.json();
+      })
+      .then(data => {
+         return data;
+      });
 };
 
 export default getAllJobs;
